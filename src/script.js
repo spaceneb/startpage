@@ -47,12 +47,16 @@ document.addEventListener('keyup', function(event) {
             }
         }
     }
+    if (event.key === 'Escape') {
+        event.preventDefault();
+        document.getElementById('autosuggestions').style = 'display: none;';
+    }
     if (omniBar.value.startsWith('http')) {
         omniBar.className = "text isUrl";
         document.getElementById('autosuggestions').innerHTML = '';
     } else {
         omniBar.className = "text";
-        if (event.key !== 'Tab') {
+        if (event.key !== 'Tab' || event.key !== 'Escape') {
             doAbstractSearch();
         }
     }
@@ -79,7 +83,7 @@ function focusOut(event) {
     if (currentElement.className == '') {                      //haha 69 lines LOL
         document.getElementById('autosuggestions').style = 'display: none;';
     }
-}
+} //fuck looking into this wish I did event handlers, it makes no difference but now the code feels bloated
 function focusIn(event) {
     document.getElementById('autosuggestions').style = 'display: flex;';
 }
