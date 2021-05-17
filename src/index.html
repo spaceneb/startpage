@@ -1,0 +1,22 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Startpage</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="searchContainer" onfocusin="focusIn(event)"  onfocusout="focusOut(event)">
+            <div class="text-flex">
+                <input type="text" placeholder="Search the web or type a URL" id="omniBar" class="text" tabindex="1">
+                <button type="button" onclick="redirect()" class="button search" tabindex="2"></button>
+                <div id="autosuggestions" aria-hidden="true"></div><!-- This would be very annoying for users with a screen reader -->
+            </div>
+        </div>
+        <div id="clockbox"></div>
+        <script src="script.js" type="text/javascript"></script>
+    </body>
+</html>
