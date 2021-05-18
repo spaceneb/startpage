@@ -5,7 +5,7 @@ const { exec } = require("child_process");
 const app = express()
 const port = 8080
 
-// MAKE SURE TO CHANGE THE MUH FUKIN ORIGIN OR PREPARE TO GET DDoSd
+// VPS Users: change the Access-Control-Allow-Origin header to the domain of your server
 
 app.get('/', function(req,res) {
     res.sendFile (path.join(__dirname, 'src/index.html'))
@@ -48,7 +48,7 @@ app.get('/feed',function(req,res) {
     try {
         Feed.load(req.query.q, function(err, rss){
             res.set('Access-Control-Allow-Origin','*') //mfw IE didn't support this shit until  version 10, 2 years after Chrome 4 xdxdxd
-            res.json(rss) // I fuckin hate promises, but, I need them
+            res.json(rss) // I fuckin hate promises, but, I need them // where was that comment going?
         });
     } catch(e) {
         res.json({"items":[]})

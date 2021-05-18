@@ -1,7 +1,9 @@
 var rssFeeds = {
     "items": [
         'https://www.apple.com/newsroom/rss-feed.rss'
-    ]};
+    ]
+}; // should probably use cookies for this shit but nah
+    // oh yeah, VPS owners should change 127.0.0.1 to be the domain of their VPS
 
 
 
@@ -13,7 +15,7 @@ function doAbstractSearch() {
     fetch('http://127.0.0.1:8080/ac?q=' + encodeURIComponent(omniBar.value), { 
   method: 'GET'
     })
-    .then(function(response) { return response.json(); })
+    .then(function(response) { return response.json(); }) // promises feel bloated idk why
     .then(function(json) {
         if (!document.getElementsByClassName('autosuggestion').length == 0) {
             document.getElementById('autosuggestions').innerHTML = ''
@@ -60,12 +62,11 @@ document.addEventListener('keyup', function(event) {
             doAbstractSearch();
         }
     }
-
 });
 var tday=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
 function GetClock(){
-    var d=new Date();
+    var d=new Date(); //haha 69 lines LOL
     var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
     var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
     if(nhour==0){ap=" AM";nhour=12;}
@@ -80,7 +81,7 @@ function GetClock(){
 GetClock();
 setInterval(GetClock,1000);
 function focusOut(event) {
-    if (currentElement.className == '') {                      //haha 69 lines LOL
+    if (currentElement.className == '') {
         document.getElementById('autosuggestions').style = 'display: none;';
     }
 } //fuck looking into this wish I did event handlers, it makes no difference but now the code feels bloated
@@ -90,3 +91,14 @@ function focusIn(event) {
 window.onmouseover = function(event) {
     currentElement = event.target;
 }
+window.addEventListener("load", function () { //grab feeds and that shit otherwise itl probably fuck up idfk
+    for (i = 0; rssFeeds.items.length; i++) {
+        fetch('http://127.0.0.1:8080/feed?q=' + encodeURIComponent(rssFeeds.items[i]), { 
+            method: 'GET'
+              })
+              .then(function(response) { return response.json(); }) // promises feel bloated idk why
+              .then(function(json) {
+              console.log(json)
+            }); //fuc dis shit is so messy
+    }
+});
