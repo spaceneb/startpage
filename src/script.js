@@ -91,14 +91,12 @@ function focusIn(event) {
 window.onmouseover = function(event) {
     currentElement = event.target;
 }
-window.addEventListener("load", function () { //grab feeds and that shit otherwise itl probably fuck up idfk
-    for (i = 0; rssFeeds.items.length; i++) {
-        fetch('http://127.0.0.1:8080/feed?q=' + encodeURIComponent(rssFeeds.items[i]), { 
-            method: 'GET'
-              })
-              .then(function(response) { return response.json(); }) // promises feel bloated idk why
-              .then(function(json) {
-              console.log(json)
-            }); //fuc dis shit is so messy
-    }
-});
+for (i = 0; i < rssFeeds.items.length; i++) {
+    fetch('http://127.0.0.1:8080/feed?q=' + encodeURIComponent(rssFeeds.items[i]), { 
+        method: 'GET'
+            })
+            .then(function(response) { return response.json(); }) // promises feel bloated idk why
+            .then(function(json) {
+            console.log(json)
+        }); //fuc dis shit is so messy
+}

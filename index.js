@@ -46,10 +46,12 @@ app.get('/ac', function(req,res) { // bascially no-cors but less bloated, that m
 })
 app.get('/feed',function(req,res) {
     try {
-        Feed.load(req.query.q, function(err, rss){
-            res.set('Access-Control-Allow-Origin','*') //mfw IE didn't support this shit until  version 10, 2 years after Chrome 4 xdxdxd
-            res.json(rss) // I fuckin hate promises, but, I need them // where was that comment going?
-        });
+        if (typeof req.query.q == "string") {
+            Feed.load(req.query.q, function(err, rss){
+                res.set('Access-Control-Allow-Origin','*') //mfw IE didn't support this shit until  version 10, 2 years after Chrome 4 xdxdxd
+                res.json(rss) // I fuckin hate promises, but, I need them // where was that comment going?
+            });
+        }
     } catch(e) {
         res.json({"items":[]})
     }
