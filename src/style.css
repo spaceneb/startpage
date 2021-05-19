@@ -138,8 +138,15 @@ input.text {
 }
 .article-img {
     max-width: 24vw;
+    border-radius: 0.6rem;
 }
 .article-title {
     font-size: 1.1em;
     font-weight: 500;
+}
+.article-author {
+    float: left;
+}
+.article-date {
+    float: right;
 }

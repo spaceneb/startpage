@@ -13,10 +13,10 @@
             <div class="text-flex">
                 <input type="text" placeholder="Search the web or type a URL" id="omniBar" class="text" tabindex="1">
                 <button type="button" onclick="redirect()" class="button search" tabindex="2"></button>
-                <div id="autosuggestions" aria-hidden="true"></div><!-- This would be very annoying for users with a screen reader -->
+                <div id="autosuggestions" style="display: none;"></div>
             </div>
         </div>
-        <div id="clockbox"></div>
+        <div id="clockbox" aria-hidden="true"></div><!-- This would be very annoying for users with a screen reader -->
         <div id="articles"></div>
         <script src="script.js" type="text/javascript"></script>
     </body>

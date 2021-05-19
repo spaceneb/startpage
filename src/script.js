@@ -9,8 +9,13 @@ var rssFeeds = {
     ]
 }; // should probably use cookies for this shit but nah
     // oh yeah, VPS owners should change 127.0.0.1 to be the domain of their VPS
-
-
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+var language;
+if (window.navigator.languages) {
+    language = window.navigator.languages[0];
+} else {
+    language = window.navigator.userLanguage || window.navigator.language;
+}
 
 
 var searchProvider = "https://duckduckgo.com/?q="; // my definitions are all over the place, im so used to swtiching back and forth from node omfg this is a nightmare
@@ -108,12 +113,23 @@ for (i = 0; i < rssFeeds.items.length; i++) {
             .then(function(response) { return response.json(); }) // promises feel bloated idk why
             .then(function(json) {
             for  (o = 0; o < json.items.length && o < 5; o++) {
-                currentUUID = uuidv4();            
+                currentUUID = uuidv4();   
                 document.getElementById('articles').innerHTML += `<div id="${currentUUID}" class="article-container"></div>`;                        //begin the awful code
                 if (typeof json.items[o].url[1].href == "string") {
                     document.getElementById(currentUUID).innerHTML += `<img src="${json.items[o].url[1].href}" alt="${json.items[o].url[1].title}" class="article-img">`;
                 }
                 document.getElementById(currentUUID).innerHTML += `<p class="article-title">${json.items[o].title}</p>`
+                if (typeof json.items[o].author == "string") {
+                    if (json.items[o].author != json.title) {
+                        document.getElementById(currentUUID).innerHTML += `<p class="article-author">${json.items[o].author + ' &#183; ' + json.title}</p>`
+                    } else {
+                        document.getElementById(currentUUID).innerHTML += `<p class="article-author">${json.items[o].author}</p>`
+                    }
+                } else {
+                    document.getElementById(currentUUID).innerHTML += `<p class="article-author">${json.title}</p>`
+                }
+                
+                document.getElementById(currentUUID).innerHTML += `<p class="article-date">${new Date(json.items[o].published).toLocaleString(language, {weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"numeric",minute:"numeric",timeZone:timezone})}</p>`
             }
         }); //fuc dis shit is so messy
 }
