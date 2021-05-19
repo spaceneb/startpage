@@ -9,10 +9,10 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "src/index.html"));
 });
 app.get("/style.css", function (req, res) {
-  res.sendFile(path.join(__dirname, "src/style.css")); // bruh what the actual fuck is this code
+  res.sendFile(path.join(__dirname, "dist/style.min.css")); // bruh what the actual fuck is this code
 }); // ive seen shitty code but come on
 app.get("/script.js", function (req, res) {
-  res.sendFile(path.join(__dirname, "src/script.js"));
+  res.sendFile(path.join(__dirname, "dist/script.min.js"));
 });
 app.get("/logo.svg", function (req, res) {
   res.sendFile(path.join(__dirname, "src/logo.svg"));
