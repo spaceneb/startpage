@@ -1,6 +1,11 @@
+/*
+Contains Code Snippets from the following:
+https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid#answer-2117523
+*/
 var rssFeeds = {
     "items": [
-        'https://www.apple.com/newsroom/rss-feed.rss'
+        'https://www.apple.com/newsroom/rss-feed.rss',
+        'https://lukesmith.xyz/rss.xml'
     ]
 }; // should probably use cookies for this shit but nah
     // oh yeah, VPS owners should change 127.0.0.1 to be the domain of their VPS
@@ -91,12 +96,21 @@ function focusIn(event) {
 window.onmouseover = function(event) {
     currentElement = event.target;
 }
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+} // credit: https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid#answer-2117523
 for (i = 0; i < rssFeeds.items.length; i++) {
     fetch('http://127.0.0.1:8080/feed?q=' + encodeURIComponent(rssFeeds.items[i]), { 
         method: 'GET'
             })
             .then(function(response) { return response.json(); }) // promises feel bloated idk why
             .then(function(json) {
-            console.log(json)
+            for  (o = 0; o < json.items.length && o < 5; o++) {
+                currentUUID = uuidv4();                                    //begin the awful code
+                document.getElementById('articles').innerHTML += `<div id="${currentUUID}" class="article-container"></div>`;
+                document.getElementById(currentUUID).innerHTML += `<p class="article-title">${json.items[o].title}</p>`
+            }
         }); //fuc dis shit is so messy
 }
