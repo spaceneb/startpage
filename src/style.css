@@ -181,3 +181,7 @@ a {
   text-decoration: none;
   color: var(--highlight);
 }
+
+#clockbox {
+  user-select: none;
+}
