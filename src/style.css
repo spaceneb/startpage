@@ -122,3 +122,24 @@ input.text {
     z-index: 15;
     position: relative;
 }
+#articles {
+    display:flex;
+    flex-wrap:wrap;
+    padding: 6vw;
+}
+.article-container {
+    width: 25vw;
+    flex: auto;
+    background: var(--search-bg);
+    border-radius: 0.6rem;
+    margin: 1vh;
+    text-align: center;
+    padding: 1em;
+}
+.article-img {
+    max-width: 24vw;
+}
+.article-title {
+    font-size: 1.1em;
+    font-weight: 500;
+}

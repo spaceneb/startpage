@@ -108,8 +108,11 @@ for (i = 0; i < rssFeeds.items.length; i++) {
             .then(function(response) { return response.json(); }) // promises feel bloated idk why
             .then(function(json) {
             for  (o = 0; o < json.items.length && o < 5; o++) {
-                currentUUID = uuidv4();                                    //begin the awful code
-                document.getElementById('articles').innerHTML += `<div id="${currentUUID}" class="article-container"></div>`;
+                currentUUID = uuidv4();            
+                document.getElementById('articles').innerHTML += `<div id="${currentUUID}" class="article-container"></div>`;                        //begin the awful code
+                if (typeof json.items[o].url[1].href == "string") {
+                    document.getElementById(currentUUID).innerHTML += `<img src="${json.items[o].url[1].href}" alt="${json.items[o].url[1].title}" class="article-img">`;
+                }
                 document.getElementById(currentUUID).innerHTML += `<p class="article-title">${json.items[o].title}</p>`
             }
         }); //fuc dis shit is so messy
