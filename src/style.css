@@ -134,15 +134,6 @@ input.text {
   border: none;
 }
 
-#clockbox {
-  font-weight: 700;
-  vertical-align: middle;
-  text-align: center;
-  font-size: 8vh;
-  z-index: 15;
-  position: relative;
-}
-
 #articles {
   display: flex;
   flex-wrap: wrap;
@@ -184,4 +175,10 @@ a {
 
 #clockbox {
   user-select: none;
+  font-weight: 700;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 8vh;
+  z-index: 15;
+  position: relative;
 }

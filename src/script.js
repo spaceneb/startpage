@@ -154,11 +154,11 @@ for (i = 0; i < rssFeeds.items.length; i++) {
           ).innerHTML += `<img src="${json.items[o].url[1].href}" alt="${json.items[o].url[1].title}" class="article-img">`;
         }
         if (typeof json.items[o].url === "string") {
-          json.items[o].url = [json.items[o].url];
+          json.items[o].url = [{ href: json.items[o].url }];
         }
         document.getElementById(
           currentUUID
-        ).innerHTML += `<a href="${json.items[o].url[0]}" target="_blank"><p class="article-title">${json.items[o].title}</p></a>`;
+        ).innerHTML += `<a href="${json.items[o].url[0].href}" target="_blank"><p class="article-title">${json.items[o].title}</p></a>`;
         if (typeof json.items[o].author === "string") {
           if (json.items[o].author !== json.title) {
             document.getElementById(
